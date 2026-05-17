@@ -90,7 +90,7 @@ $text-light: #636e72;
   transition: transform 0.2s, background 0.2s;
 
   &:hover {
-    background: darken($orange, 5%);
+    background: $orange;
     transform: translateY(-1px);
   }
 
@@ -137,7 +137,7 @@ $text-light: #636e72;
     text-decoration: underline;
 
     &:hover {
-      color: darken($orange, 10%);
+      color: $orange;
     }
   }
 }

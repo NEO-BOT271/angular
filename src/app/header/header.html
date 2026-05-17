@@ -1,0 +1,42 @@
+<header>
+    <nav>
+        <div class="left-nav">
+            <a routerLink="/home"><span>Foodie</span></a>
+            <a class="desktop-link" routerLink="/home">Home</a>
+            <a class="desktop-link" routerLink="/menu">Menu</a>
+        </div>
+
+        <div class="right-nav">
+            <img routerLink="/cart" src="/shopping-cart-svgrepo-com.svg" alt="shopping-cart">
+
+            @if (!authService.currentUser()) {
+            <a class="desktop-link" routerLink="/login">Log In</a>
+            <a class="desktop-link" id="signup" routerLink="/signup">Sign Up</a>
+            } @else {
+            <div class="profile-trigger" routerLink="/profile" style="cursor: pointer;">
+                <img src="/profile-round-1342-svgrepo-com.svg" alt="" style="width: 20px; height: 20px;">
+            </div>
+            }
+
+            <div class="burger" [class.open]="isMenuOpen" (click)="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="overlay" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
+
+<div class="side-menu" [class.open]="isMenuOpen">
+    <nav>
+        <a routerLink="/home" (click)="toggleMenu()">Home</a>
+        <a routerLink="/menu" (click)="toggleMenu()">Menu</a>
+
+        @if (!authService.currentUser()) {
+        <a routerLink="/login" (click)="toggleMenu()">Log In</a>
+        <a routerLink="/signup" (click)="toggleMenu()">Sign Up</a>
+        }
+    </nav>
+</div>

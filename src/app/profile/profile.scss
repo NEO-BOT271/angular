@@ -1,0 +1,242 @@
+.profile-settings-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: #333;
+
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    @media (max-width: 768px) { text-align: center; font-size: 1.5rem; }
+  }
+
+  .tab-navigation {
+    display: flex;
+    background-color: #f3f4f6;
+    padding: 0.4rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-tab {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6b7280;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.2s;
+
+      &.active {
+        background-color: white;
+        color: #111827;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .settings-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 2rem;
+    @media (max-width: 480px) { padding: 1.25rem; }
+
+    .settings-header {
+      margin-bottom: 1.5rem;
+      @media (max-width: 768px) { text-align: center; }
+
+      h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      p {
+        font-size: 0.85rem;
+        color: #6b7280;
+        margin: 4px 0 0;
+      }
+    }
+  }
+
+  .avatar-container {
+    margin-bottom: 1.5rem;
+    @media (max-width: 768px) { display: flex; justify-content: center; }
+
+    .avatar-placeholder {
+      width: 70px;
+      height: 70px;
+      background-color: #f9fafb;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .form-row {
+    display: flex;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .form-control {
+      flex: 1;
+    }
+  }
+
+  .form-control {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+
+    input,
+    textarea {
+      background-color: #f9fafb;
+      border: 1px solid #f3f4f6;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+
+      &:focus {
+        outline: none;
+        border-color: #ff7043;
+        background-color: white;
+      }
+    }
+
+    .disabled-field {
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+    
+    small {
+      margin-top: 4px;
+      color: #9ca3af;
+      font-size: 0.75rem;
+    }
+  }
+
+  .save-button, button {
+    background-color: #ff6b35;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #ffa237;
+    }
+
+    &:disabled {
+      background-color: #fdba74;
+      cursor: not-allowed;
+    }
+  }
+
+  #buttonstyle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      button, .save-button {
+        width: 100%;
+      }
+    }
+  }
+
+  #logouti {
+    background-color: transparent;
+    color: #ff6b35;
+    border: 1px solid #ff6b35;
+    
+    &:hover {
+      background-color: #fff5f2;
+    }
+  }
+}
+
+.requirements {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 20px;
+
+  li {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 4px;
+  }
+}
+
+.delete-zone {
+  border: 1px solid #fee2e2;
+  background-color: #fef2f2;
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  h3 {
+    color: #dc2626;
+    font-size: 16px;
+    margin-top: 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: #7f1d1d;
+  }
+
+  .delete-btn {
+    background-color: #ff7272;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 150px;
+    transition: background 0.3s;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: red;
+    }
+  }
+}

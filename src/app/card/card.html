@@ -1,0 +1,56 @@
+@if (product()) {
+<section class="detail-page">
+    <div class="main-layout">
+        <img [src]="product().image" [alt]="product().name">
+        
+        <aside>
+            <h1>{{ product().name }}</h1>
+            <div class="rating">★ {{ product().rate }} (2.7 rating)</div>
+            <h1 class="price">${{ product().price | number:'1.2-2' }}</h1>
+            
+            <p class="badge">
+                {{ product().vegetarian ? '🥬 Vegetarian' : '🥩 Non-Vegetarian' }}
+            </p>
+
+            <p><strong>Ingredients:</strong></p>
+            <ul>
+                @for (ing of product().ingredients; track ing) {
+                    <li>{{ ing }}</li>
+                }
+            </ul>
+
+            <h2>Preparation Method:</h2>
+            <p>{{ product().method }}</p>
+
+            <div class="stepper-action">
+                <div class="stepper">
+                    <button (click)="updateQty(-1)">-</button>
+                    <span>{{ quantity() }}</span>
+                    <button (click)="updateQty(1)">+</button>
+                </div>
+                <button class="cart-btn" (click)="addToCart()">Add to Cart</button>
+            </div>
+        </aside>
+    </div>
+
+    <h2 class="section-title">You May Also Like</h2>
+    <article class="related-products">
+    @for (item of relatedProducts(); track item.id) {
+        <div class="mini-card" [routerLink]="['/card']" [queryParams]="{ id: item.id }">
+            <img [src]="item.image" alt="">
+            <h3>{{ item.name }}</h3>
+            <p class="description">{{ item.description }}</p>
+            
+            <div class="rating">
+                <span class="star">★</span> {{ item.rate }}
+            </div>
+            
+            <div class="price-action-row">
+                <p>${{ item.price | number:'1.2-2' }}</p>
+                <button class="mini-add-btn">Add to Cart</button>
+            </div>
+        </div>
+    }
+</article>
+</section>
+}

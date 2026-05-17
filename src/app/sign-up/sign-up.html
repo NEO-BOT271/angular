@@ -1,0 +1,54 @@
+<form class="create-account-form" (ngSubmit)="onSubmit()">
+    <article>
+        <h1>Create Account</h1>
+        <p>Join us today</p>
+        @if (errorMessage()) {
+            <p style="color: red;">{{ errorMessage() }}</p>
+        }
+    </article>
+
+    <div class="name-row">
+        <label>
+            First Name
+            <input type="text" name="firstName" [(ngModel)]="formData().firstName" placeholder="John" required>
+        </label>
+        <label>
+            Last Name
+            <input type="text" name="lastName" [(ngModel)]="formData().lastName" placeholder="Doe" required>
+        </label>
+    </div>
+
+    <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="formData().email" placeholder="you@example.com" required>
+    </label>
+
+    <label class="password-label">
+        Password
+        <div class="input-wrapper">
+            <input [type]="hidePassword() ? 'password' : 'text'" 
+                   name="password" 
+                   [(ngModel)]="formData().password" 
+                   placeholder="••••••••" required>
+            <div class="eye-toggle" (click)="toggleVisibility()">
+                @if (hidePassword()) {
+                    <img src="/eye-svgrepo-com.svg" alt="Show">
+                } @else {
+                    <img src="/eye-slash-svgrepo-com.svg" alt="Hide">
+                }
+            </div>
+        </div>
+    </label>
+
+    <ul class="requirements">
+        <li>At least 8 characters</li>
+        <li>Uppercase and lowercase letters</li>
+        <li>At least one number</li>
+    </ul>
+
+    <button type="submit" [disabled]="loading()">
+        @if (loading()) { Processing... } @else { Create Account }
+    </button>
+
+    <p class="footer-text">Already have an account? <span routerLink="/login">Sign in</span></p>
+</form>

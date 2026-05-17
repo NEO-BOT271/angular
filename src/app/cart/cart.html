@@ -1,0 +1,57 @@
+<div class="cart-container">
+  <header class="cart-header">
+    <h1>Shopping Cart</h1>
+    <p class="count">{{ cartService.cartCount() }} items in your tray</p>
+  </header>
+
+  <main class="cart-layout">
+    <section class="item-list">
+      @for (item of cartService.cartItems(); track item.id) {
+        <div class="item-card">
+          <div class="product-info">
+            <img [src]="item.product.image" [alt]="item.product.name">
+            <div class="text">
+              <h3>{{ item.product.name }}</h3>
+              <p class="desc">{{ item.product.description }}</p>
+            </div>
+          </div>
+
+          <div class="controls">
+            <div class="stepper">
+              <button (click)="updateQty(item, -1)">-</button>
+              <span class="qty">{{ item.quantity }}</span>
+              <button (click)="updateQty(item, 1)">+</button>
+            </div>
+            
+            <div class="price-section">
+              <span class="unit-price">${{ item.product.price | number:'1.2-2' }}</span>
+              <span class="row-total">${{ (item.product.price * item.quantity) | number:'1.2-2' }}</span>
+            </div>
+
+              <img (click)="onRemove(item.id)" class="remove-btn" src="/trash-svgrepo-com.svg" alt="Remove">
+            
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-state">Your cart is empty. <p routerLink="/menu">Go back to menu</p></div>
+      }
+    </section>
+
+    <aside class="summary-card">
+      <h3>Order Summary</h3>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>${{ subtotal() | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Service Tax (10%)</span>
+        <span>${{ tax() | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-row total">
+        <span>Estimated Total</span>
+        <span class="price-big">${{ total() | number:'1.2-2' }}</span>
+      </div>
+      <button class="checkout-btn" (click)="onCheckout()">Confirm Order</button>
+    </aside>
+  </main>
+</div>

@@ -1,0 +1,61 @@
+<section id="first">
+    <h1 class="seen">Delicious Food Delivered to Your Door</h1>
+    <h2 class="seen">Fresh ingredients, authentic flavors, fast delivery</h2>
+    <h1 class="vanished">Delicious Food <br> Delivered to Your Door</h1>
+    <h2 class="vanished">Fresh ingredients, authentic flavors, fast delivery</h2>
+    <button routerLink="/menu">Order Now</button>
+</section>
+
+<section id="api_popular_dishes">
+    <h2 class="section-title">Popular Dishes</h2>
+    
+    <div class="product-grid">
+        @for (product of products(); track product.id) {
+            <div class="product-card" (click)="goToProductDetail(product.id)">
+                <div class="card-img">
+                    <img [src]="product.image" [alt]="product.name">
+                </div>
+                
+                <div class="card-body">
+                    <h3>{{ product.name }}</h3>
+                    <p class="description">{{ product.description }}</p>
+                    
+                    <div class="rating">
+                        <span class="star">★</span> {{ product.rate }}
+                    </div>
+                    
+                    <div class="card-price-action">
+                        <span class="price">${{ product.price | number:'1.2-2' }}</span>
+                        <button (click)="handleAddToCart($event, product.id)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section id="third">
+    <img src="/restaurant-kitchen-chef-cooking.jpg" alt="Chef Cooking">
+    <div>
+        <h1>Our Story</h1>
+        <p class="s">At Foodie, we believe that great food brings people together. Our chefs use only <br>
+            the freshest ingredients to create dishes that delight your taste buds and warm <br>
+            your heart.</p>
+        <p class="s">From traditional recipes passed down through generations to innovative <br>
+            modern cuisine, every dish is crafted with passion and care. We're committed to <br>
+            delivering not just meals, but memorable dining experiences right to your door.</p>
+
+        <p class="v">At Foodie, we believe that great food brings <br>
+            people together. Our chefs use only the <br>
+            freshest ingredients to create dishes that <br>
+            delight your taste buds and warm your heart.</p>
+
+        <p class="v">From traditional recipes passed down <br>
+            through generations to innovative modern <br>
+            cuisine, every dish is crafted with passion and <br>
+            care. We're committed to delivering not just <br>
+            meals, but memorable dining experiences <br>
+            right to your door.</p>
+        <button routerLink="/menu">Explore Our Menu</button>
+    </div>
+</section>

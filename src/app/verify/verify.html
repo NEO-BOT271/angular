@@ -1,0 +1,46 @@
+<div class="verify-container">
+  <div class="verify-card">
+    <div class="icon-box">
+      <img src="/icons8-video-id-verification-96.png" alt="Verify Email">
+    </div>
+
+    <h1>Verify your email</h1>
+    <p class="subtitle">
+      We've sent a verification code to <br>
+      <strong>{{ email() }}</strong>
+    </p>
+
+    @if (message().text) {
+      <div class="alert" [class.alert-error]="message().type === 'error'" [class.alert-success]="message().type === 'success'">
+        {{ message().text }}
+      </div>
+    }
+
+    <form (ngSubmit)="onVerify()">
+      <div class="form-group">
+        <label>Enter Verification Code</label>
+        <input 
+          type="text" 
+          [(ngModel)]="verificationCode" 
+          name="code" 
+          placeholder="e.g. 123456"
+          maxlength="10"
+          required
+        >
+      </div>
+
+      <button type="submit" class="verify-btn" [disabled]="loading() || !verificationCode()">
+        {{ loading() ? 'Verifying...' : 'Verify Email' }}
+      </button>
+    </form>
+
+    <div class="footer-actions">
+      <p>Didn't receive the code?</p>
+      <button class="resend-btn" (click)="onResend()" [disabled]="loading()">
+        Resend Code
+      </button>
+    </div>
+    
+    <a routerLink="/login" class="back-link">Back to Login</a>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="menu-page-container">
+  <aside class="filters-sidebar">
+    <h2>Filters</h2>
+
+    <article class="filter-group">
+      <label for="search">Search</label>
+      <input type="text" id="search" class="orange-input" placeholder="Search dishes..." 
+             [value]="filters().search"
+             (input)="updateFilter('search', $any($event.target).value)">
+    </article>
+
+    <article class="filter-group">
+      <label>Categories</label>
+      <div class="category-list">
+        @for (cat of categories(); track cat.id) {
+          <div class="custom-checkbox" (click)="toggleCategory(cat.id)">
+            <div class="box" [class.checked]="filters().categoryId === cat.id">
+              @if (filters().categoryId === cat.id) { <span>✓</span> }
+            </div>
+            <span class="label-text">{{ cat.name }}</span>
+          </div>
+        }
+      </div>
+    </article>
+
+    <article class="filter-group toggle-row">
+      <label>Vegetarian Only</label>
+      <label class="switch">
+        <input type="checkbox" [checked]="filters().isVegetarian" 
+               (change)="updateFilter('isVegetarian', $any($event.target).checked)">
+        <span class="slider round"></span>
+      </label>
+    </article>
+
+    <article class="filter-group">
+      <label>Spiciness (0-5)</label>
+      <input type="range" min="0" max="5" step="1" class="orange-range" 
+             [value]="filters().spiciness"
+             (input)="updateFilter('spiciness', $any($event.target).value)">
+      <p class="sub-label">Level: {{ filters().spiciness || 'not selected' }}</p>
+    </article>
+
+    <article class="filter-group">
+      <label>Minimum Rating</label>
+      <input type="range" min="0" max="5" step="0.5" class="orange-range" 
+             [value]="filters().minRating"
+             (input)="updateFilter('minRating', $any($event.target).value)">
+      <p class="sub-label">⭐ {{ filters().minRating | number:'1.1-1' }}+</p>
+    </article>
+
+    <article class="filter-group">
+      <label>Min price</label>
+      <input type="range" min="0" max="500" class="orange-range" 
+             [value]="filters().minPrice"
+             (input)="updateFilter('minPrice', $any($event.target).value)">
+    </article>
+
+    <article class="filter-group">
+      <label>Max price</label>
+      <input type="range" min="0" max="500" class="orange-range" 
+             [value]="filters().maxPrice"
+             (input)="updateFilter('maxPrice', $any($event.target).value)">
+      <p class="sub-label">$ {{ filters().maxPrice }}+</p>
+    </article>
+
+    <button class="btn-clear" (click)="clearAll()">Clear All Filters</button>
+  </aside>
+
+  <section class="menu-content">
+    <header class="menu-header">
+      <h1>Menu</h1>
+      <p>Showing {{ products().length }} products</p>
+    </header>
+
+    <div class="product-grid">
+      @for (product of products(); track product.id) {
+      <article class="product-card" (click)="goToProductDetail(product.id)">
+        <figure class="card-img">
+          <img [src]="product.image" [alt]="product.name">
+        </figure>
+
+        <div class="card-body">
+          <h3>{{ product.name }}</h3>
+          <p class="description">{{ product.description }}</p>
+
+          <div class="rating">
+            <span class="star">★</span> {{ product.rate }}
+          </div>
+
+          <div class="card-price-action">
+            <span class="price">${{ product.price | number:'1.2-2' }}</span>
+            <button class="btn-add" (click)="$event.stopPropagation(); handleAddToCart(product.id)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </article>
+      }
+    </div>
+  </section>
+</div>

@@ -1,0 +1,46 @@
+<form (ngSubmit)="onSubmit()">
+    <article>
+        <h2>Welcome Back</h2>
+        <p>Sign in to your account</p>
+        @if (errorMessage()) {
+            <p style="color: #ff4d4d; font-weight: bold;">{{ errorMessage() }}</p>
+        }
+    </article>
+
+    <label for="email">
+        Email
+        <input type="email" name="email" [(ngModel)]="formData().email" placeholder="you@example.com" required>
+    </label>
+
+    <label class="password-container" for="password">
+        Password
+        <div class="input-wrapper">
+            <input [type]="hidePassword() ? 'password' : 'text'" 
+                   name="password" 
+                   [(ngModel)]="formData().password" 
+                   placeholder="••••••••" required>
+            <div class="eye-toggle" (click)="toggleVisibility()">
+                @if (hidePassword()) {
+                    <img src="/eye-svgrepo-com.svg" alt="Show Password">
+                } @else {
+                    <img src="/eye-slash-svgrepo-com.svg" alt="Hide Password">
+                }
+            </div>
+        </div>
+    </label>
+
+    <section>
+        <label for="checkbox">
+            <input type="checkbox" name="remember"> Remember me
+        </label>
+        <label for="forgot">
+            <a routerLink="/forgot">Forgot Password?</a>
+        </label>
+    </section>
+
+    <button type="submit" [disabled]="loading()">
+        @if (loading()) { Connecting... } @else { Sign in }
+    </button>
+
+    <p>or <br> Don't have an account?<span routerLink="/signup" id="routersign" >Sign up </span></p>
+</form>

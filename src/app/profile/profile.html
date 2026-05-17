@@ -1,0 +1,111 @@
+<div class="profile-settings-page">
+  <h1 class="page-title">Profile Settings</h1>
+
+  <div class="tab-navigation">
+    <button class="nav-tab" [class.active]="activeTab() === 'personal'" (click)="setTab('personal')">Personal Info</button>
+    <button class="nav-tab" [class.active]="activeTab() === 'password'" (click)="setTab('password')">Change Password</button>
+    <button class="nav-tab" [class.active]="activeTab() === 'settings'" (click)="setTab('settings')">Account Settings</button>
+  </div>
+
+  <div class="settings-card">
+    @if (activeTab() === 'personal' && user()) {
+    <div class="settings-header">
+      <h2>Personal Information</h2>
+      <p>Update your personal details</p>
+    </div>
+
+    <form (ngSubmit)="onUpdateProfile()" class="settings-form">
+      <div class="avatar-container">
+        <div class="avatar-placeholder">
+          <img [src]="user().picture || '/default-avatar.png'" alt="Profile" onerror="this.src='/default-avatar.png'">
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label>Picture</label>
+        <input type="text" [(ngModel)]="user().picture" name="picture" placeholder="https://example.com/image.jpg">
+      </div>
+
+      <div class="form-row">
+        <div class="form-control">
+          <label>First Name</label>
+          <input type="text" [(ngModel)]="user().firstName" name="firstName" required>
+        </div>
+        <div class="form-control">
+          <label>Last Name</label>
+          <input type="text" [(ngModel)]="user().lastName" name="lastName" required>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label>Email</label>
+        <input type="email" [value]="user().email" name="email" disabled class="disabled-field">
+        <small>Email cannot be changed.</small>
+      </div>
+
+      <div class="form-control">
+        <label>Phone Number</label>
+        <input type="text" [(ngModel)]="user().phoneNumber" name="phoneNumber" placeholder="593...">
+      </div>
+
+      <div class="form-control">
+        <label>Address</label>
+        <textarea [(ngModel)]="user().address" name="address" rows="3" placeholder="Enter your address"></textarea>
+      </div>
+
+      <div class="form-control">
+        <label>Age</label>
+        <input type="number" [(ngModel)]="user().age" name="age">
+      </div>
+
+      <div id="buttonstyle">
+        <button type="submit" class="save-button" [disabled]="loading()">
+          {{ loading() ? 'Saving...' : 'Save Changes' }}
+        </button>
+        <button type="button" id="logouti" (click)="logout()">
+          Log Out
+        </button>
+      </div>
+    </form>
+    }
+
+    @if (activeTab() === 'password') {
+    <div class="settings-header">
+      <h2>Change Password</h2>
+      <p>Update your password</p>
+    </div>
+    <form (ngSubmit)="onChangePassword()" class="settings-form">
+      <div class="form-control">
+        <label>Current Password</label>
+        <input type="password" [(ngModel)]="passwordData().oldPassword" name="oldP">
+      </div>
+      <div class="form-control">
+        <label>New Password</label>
+        <input type="password" [(ngModel)]="passwordData().newPassword" name="newP">
+      </div>
+      <div class="form-control">
+        <label>Confirm New Password</label>
+        <input type="password" [(ngModel)]="passwordData().confirmPassword" name="confP">
+      </div>
+      <ul class="requirements">
+        <li>• At least 8 characters</li>
+        <li>• Uppercase and lowercase letters</li>
+        <li>• At least one number</li>
+      </ul>
+      <button type="submit" class="save-button" [disabled]="loading()">Update Password</button>
+    </form>
+    }
+
+    @if (activeTab() === 'settings') {
+    <div class="settings-header">
+      <h2>Account Settings</h2>
+      <p>Manage your account status</p>
+    </div>
+    <div class="delete-zone">
+      <h3>Danger Zone</h3>
+      <p>Once you delete your account, there is no going back. Please be certain.</p>
+      <button (click)='DeleteAccount()' class="delete-btn">Delete Account</button>
+    </div>
+    }
+  </div>
+</div>
